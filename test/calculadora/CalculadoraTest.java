@@ -52,9 +52,15 @@ public class CalculadoraTest {
 
 	@DisplayName("Testa a subtração de dois números positivos")
 	@Test
-	public void testSubtracaoDoisNumeros() {
+	public void testSubtracaoDoisNumerosPositivos() {
 		int subtracao = calc.subtracao(15, 5);		
 		Assertions.assertEquals(10, subtracao);		
+	}
+	@DisplayName("Testa a subtração de dois números negativos")
+	@Test
+	public void testSubtracaoDoisNumerosNegativos() {
+		int subtracao = calc.subtracao(15, -5);		
+		Assertions.assertEquals(20, subtracao);		
 	}
 
 }
