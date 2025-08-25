@@ -97,4 +97,24 @@ public class CalculadoraTest {
 		Assertions.assertEquals(false, negativo);		
 	}
 	
+	@DisplayName("Testa se são número iguais")
+	@Test
+	public void testComparaNumerosIguais() {
+		int iguais = calc.compara(5,5);		
+		Assertions.assertEquals(0, iguais);		
+	}
+
+	@DisplayName("Testa se é maior")
+	@Test
+	public void testComparaNumerosMaiorQue() {
+		int maior = calc.compara(9,5);		
+		Assertions.assertEquals(1, maior);		
+	}
+
+	@DisplayName("Testa se é menor")
+	@Test
+	public void testComparaNumerosMenorQue() {
+		int menor = calc.compara(9,65);		
+		Assertions.assertEquals(-1,menor);
+	}
 }
