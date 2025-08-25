@@ -38,7 +38,7 @@ public class CalculadoraTest {
 	public void testDivisaoPorZero() {
 		try {
 			int divisao = calc.divisao(8, 0);
-			fail("Exce��o n�o lan�ada");
+			fail("Exceção não lançada");
 		}catch (ArithmeticException e) {
 			assertEquals("/ by zero", e.getMessage());
 		}		
@@ -62,5 +62,39 @@ public class CalculadoraTest {
 		int subtracao = calc.subtracao(15, -5);		
 		Assertions.assertEquals(20, subtracao);		
 	}
+	@DisplayName("Testa a multiplicação de dois números")
+	@Test
+	public void testSubMultiplicacaoDoisNumeros() {
+		int multiplicacao = calc.multiplicacao(4, 5);		
+		Assertions.assertEquals(20, multiplicacao);		
+	}
+	@DisplayName("Testa a multiplicação por zero")
+	@Test
+	public void testSubMultiplicacaoporZero() {
+		int multiplicacao = calc.multiplicacao(0, 5);		
+		Assertions.assertEquals(0, multiplicacao);		
+	}
 
+
+	@DisplayName("Testa o somatório de um número")
+	@Test
+	public void testSomatorio() {
+		int somatorio = calc.somatoria(5);		
+		Assertions.assertEquals(15, somatorio);		
+	}
+
+	@DisplayName("Testa se é positivo com um número positivo")
+	@Test
+	public void testPositivoComNumeroPositivo() {
+		boolean positivo = calc.ehPositivo(5);		
+		Assertions.assertEquals(true, positivo);		
+	}
+
+	@DisplayName("Testa se é positivo com um número negativo")
+	@Test
+	public void testPositivoComNumeroNegativo() {
+		boolean negativo = calc.ehPositivo(-67);		
+		Assertions.assertEquals(false, negativo);		
+	}
+	
 }
