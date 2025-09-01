@@ -1,0 +1,53 @@
+Boa pergunta 👏, vou analisar como se eu fosse um revisor de qualidade de testes unitários.
+
+### ✅ Pontos positivos dos seus testes
+
+* **Cobrem os cenários principais**: vitória do jogador 1, vitória do jogador 2, empate e entradas inválidas.
+* **Organização**: você usou `@BeforeEach` para inicializar o objeto, bom padrão.
+* **Boa legibilidade**: nomes e `@DisplayName` descrevem bem o que o teste está verificando.
+* **Inclui testes negativos**: não esqueceu de validar opções inválidas (isso é ótimo).
+
+---
+
+### ⚠️ Pontos de atenção
+
+1. **Cobertura incompleta de combinações possíveis**
+   Existem **9 combinações válidas** (3 escolhas × 3 escolhas), mas você testou apenas algumas:
+
+   * (1 vs 2), (3 vs 2), (3 vs 1) e (1 vs 1).
+     Faltam:
+   * Jogador 1 = pedra (2) vs papel (1) → vitória jogador 2
+   * Jogador 1 = papel (1) vs tesoura (3) → vitória jogador 2
+   * Jogador 1 = pedra (2) vs tesoura (3) → vitória jogador 1
+   * Empates (2 vs 2) e (3 vs 3).
+
+   Ou seja, alguns caminhos da lógica ainda não são testados.
+
+2. **Redundância**
+   O teste `testOpcaoInvalidaAmbos` está redundante: ele é **idêntico** ao `testOpcaoInvalidaJogador2Menor` (mesmo input, mesmo esperado). Para realmente testar "ambos inválidos", seria interessante usar algo como `jogador1 = 0, jogador2 = 4`.
+
+3. **Cobertura de branch**
+   Seu método tem condições (`if`s) que só são percorridas dependendo da diferença `(jogador1 - jogador2)`. Alguns casos não estão exercitados (por exemplo, a condição `(jogador1 - jogador2) == 2`).
+
+4. **Boas práticas adicionais**
+
+   * Poderia usar **testes parametrizados** (JUnit 5 `@ParameterizedTest`) para evitar repetição de código, já que só mudam os parâmetros e o resultado esperado.
+   * Nomes dos métodos poderiam seguir um padrão como `quandoJogador1EscolhePapelEJogador2EscolhePedra_entaoJogador1Vence` (mais descritivo).
+
+---
+
+### 📊 Avaliação geral
+
+* **Suficientes?** → Não totalmente, faltam alguns cenários para garantir **cobertura completa** da lógica.
+* **Redundantes?** → Sim, especialmente o último teste de inválidos.
+* **Boas práticas?** → Está no caminho certo (boa organização e clareza), mas pode melhorar usando parametrização e eliminando duplicações.
+
+---
+
+👉 Minha sugestão prática:
+
+1. Completar os **9 cenários possíveis** válidos.
+2. Corrigir o teste redundante de inválidos.
+3. Usar `@ParameterizedTest` para reduzir repetição.
+
+Quer que eu reescreva seus testes no formato **parametrizado** (JUnit 5) cobrindo todos os casos, ou prefere que eu só adicione os que estão faltando mantendo o estilo atual?
